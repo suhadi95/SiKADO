@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/suhadipc/public_html/web_sikado
+    - export DEPLOYPATH=/home/suhadipc/public_html/web_sikado/
     - /bin/mkdir -p $DEPLOYPATH
     - /usr/bin/rsync -av --exclude='.git' --exclude='.env' --exclude='.env.*' --exclude='node_modules' --exclude='tests' --exclude='storage/app/google' --exclude='storage/logs/*' --exclude='storage/framework/cache/data/*' --exclude='storage/framework/sessions/*' --exclude='storage/framework/views/*' ./ $DEPLOYPATH/
     - /bin/mkdir -p $DEPLOYPATH/storage/framework/{cache,sessions,views} $DEPLOYPATH/storage/logs $DEPLOYPATH/storage/app/public $DEPLOYPATH/bootstrap/cache

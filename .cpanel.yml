@@ -2,13 +2,20 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/suhadipc/public_html/web_sikado/
-    - /bin/mkdir -p $DEPLOYPATH
-    - /usr/bin/rsync -av --exclude='.git' --exclude='.env' --exclude='.env.*' --exclude='node_modules' --exclude='tests' --exclude='storage/app/google' --exclude='storage/logs/*' --exclude='storage/framework/cache/data/*' --exclude='storage/framework/sessions/*' --exclude='storage/framework/views/*' ./ $DEPLOYPATH/
-    - /bin/mkdir -p $DEPLOYPATH/storage/framework/{cache,sessions,views} $DEPLOYPATH/storage/logs $DEPLOYPATH/storage/app/public $DEPLOYPATH/bootstrap/cache
-    - cd $DEPLOYPATH && /usr/local/bin/php /usr/local/bin/composer install --no-dev --optimize-autoloader --no-interaction
-    - cd $DEPLOYPATH && /usr/local/bin/php artisan migrate --force
-    - cd $DEPLOYPATH && /usr/local/bin/php artisan storage:link
-    - cd $DEPLOYPATH && /usr/local/bin/php artisan config:cache
-    - cd $DEPLOYPATH && /usr/local/bin/php artisan route:cache
-    - cd $DEPLOYPATH && /usr/local/bin/php artisan view:cache
-    - /bin/chmod -R 775 $DEPLOYPATH/storage $DEPLOYPATH/bootstrap/cache
+    - /bin/rm -rf $DEPLOYPATH/app
+    - /bin/rm -rf $DEPLOYPATH/bootstrap
+    - /bin/rm -rf $DEPLOYPATH/config
+    - /bin/rm -rf $DEPLOYPATH/database
+    - /bin/rm -rf $DEPLOYPATH/resources
+    - /bin/rm -rf $DEPLOYPATH/routes
+    - /bin/cp -R app $DEPLOYPATH
+    - /bin/cp -R bootstrap $DEPLOYPATH
+    - /bin/cp -R config $DEPLOYPATH
+    - /bin/cp -R database $DEPLOYPATH
+    - /bin/cp -R resources $DEPLOYPATH
+    - /bin/cp -R routes $DEPLOYPATH
+    - /bin/cp -R public/. $DEPLOYPATH/public/
+    - /bin/cp artisan $DEPLOYPATH
+    - /bin/cp composer.json $DEPLOYPATH
+    - /bin/cp composer.lock $DEPLOYPATH
+    - /bin/cp .cpanel.yml $DEPLOYPATH

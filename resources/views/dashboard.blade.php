@@ -71,7 +71,7 @@
 @section('fab')
     <a
         href="{{ route('activities.create') }}"
-        class="fab flex h-12 w-12 items-center justify-center rounded-full bg-brand-600 text-white shadow-lg shadow-brand-600/30"
+        class="fab tap flex h-12 w-12 items-center justify-center rounded-full bg-brand-600 text-white shadow-lg shadow-brand-600/30"
         aria-label="Tambah kegiatan"
     >
         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

@@ -1,7 +1,12 @@
 import './bootstrap';
+import * as Turbo from '@hotwired/turbo';
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;
+window.Turbo = Turbo;
+
+// Turbo hanya untuk link yang opt-in (bottom-nav memakai data-turbo="true").
+Turbo.session.drive = false;
 
 document.addEventListener('alpine:init', () => {
     Alpine.store('toast', {
@@ -164,6 +169,51 @@ document.addEventListener('alpine:init', () => {
 });
 
 Alpine.start();
+
+function consumePageFlash() {
+    const el = document.getElementById('page-flash');
+
+    if (! el) {
+        return;
+    }
+
+    try {
+        const data = JSON.parse(el.textContent || '{}');
+
+        if (data.success) {
+            Alpine.store('toast').show(data.success, 'success');
+        }
+
+        if (data.error) {
+            Alpine.store('toast').show(data.error, 'error');
+        }
+    } catch {
+        // Abaikan flash yang tidak valid.
+    } finally {
+        el.remove();
+    }
+}
+
+document.addEventListener('turbo:before-render', () => {
+    if (typeof Alpine.destroyTree === 'function') {
+        Alpine.destroyTree(document.body);
+    }
+});
+
+document.addEventListener('turbo:render', () => {
+    if (typeof Alpine.initTree === 'function') {
+        Alpine.initTree(document.body);
+    }
+});
+
+document.addEventListener('turbo:load', () => {
+    Alpine.store('loading').hide();
+    consumePageFlash();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    consumePageFlash();
+});
 
 window.copyToClipboard = async function (text) {
     try {

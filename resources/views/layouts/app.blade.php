@@ -21,6 +21,16 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans text-slate-800 antialiased" x-data>
+    @php
+        $flashPayload = [
+            'success' => session('success'),
+            'error' => session('error') ?? ($errors->any() ? $errors->first() : null),
+        ];
+    @endphp
+    @if ($flashPayload['success'] || $flashPayload['error'])
+        <script type="application/json" id="page-flash">@json($flashPayload)</script>
+    @endif
+
     <div class="app-shell mx-auto min-h-screen max-w-3xl">
         <header class="sticky top-0 z-30 border-b border-slate-200/80 bg-white/95 backdrop-blur">
             <div class="flex items-center justify-between px-3 py-2">
@@ -52,19 +62,5 @@
     @include('components.toast')
     @include('components.loading')
     @include('components.confirm-dialog')
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            @if (session('success'))
-                Alpine.store('toast').show(@json(session('success')), 'success');
-            @endif
-            @if (session('error'))
-                Alpine.store('toast').show(@json(session('error')), 'error');
-            @endif
-            @if ($errors->any())
-                Alpine.store('toast').show(@json($errors->first()), 'error');
-            @endif
-        });
-    </script>
 </body>
 </html>

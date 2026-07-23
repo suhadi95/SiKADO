@@ -54,3 +54,47 @@ body {
 [x-cloak] {
     display: none !important;
 }
+
+/* Feedback tap untuk interaksi smartphone */
+button,
+.fab,
+.bottom-nav a,
+.tap {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition:
+        transform 0.12s ease,
+        filter 0.12s ease,
+        opacity 0.12s ease,
+        background-color 0.12s ease;
+}
+
+button:active:not(:disabled),
+.fab:active,
+.bottom-nav a:active,
+.tap:active {
+    transform: scale(0.94);
+    filter: brightness(0.96);
+    opacity: 0.92;
+}
+
+button:disabled {
+    opacity: 0.55;
+}
+
+.bottom-nav a.is-active {
+    position: relative;
+}
+
+.bottom-nav a.is-active::after {
+    content: '';
+    position: absolute;
+    top: 0.2rem;
+    left: 50%;
+    width: 1rem;
+    height: 0.2rem;
+    border-radius: 999px;
+    background: currentColor;
+    transform: translateX(-50%);
+    opacity: 0.85;
+}

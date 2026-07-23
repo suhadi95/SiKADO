@@ -30,7 +30,7 @@
                 rel="noopener"
                 title="Buka folder Google Drive"
                 aria-label="Buka folder Google Drive"
-                class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 text-slate-700 active:bg-slate-200"
+                class="tap inline-flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 text-slate-700 active:bg-slate-200"
             >
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" />
@@ -77,7 +77,7 @@
             href="{{ route('activities.edit', $activity) }}"
             title="Edit kegiatan"
             aria-label="Edit kegiatan"
-            class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-amber-50 text-amber-700 active:bg-amber-100"
+            class="tap inline-flex h-9 w-9 items-center justify-center rounded-lg bg-amber-50 text-amber-700 active:bg-amber-100"
         >
             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />

@@ -9,14 +9,13 @@
             <h3 class="text-[14px] font-semibold leading-snug text-slate-900">{{ $activity->name }}</h3>
             <p class="mt-0.5 text-[11px] leading-snug text-slate-600">
                 <span class="font-medium text-slate-700">{{ $activity->activity_date->translatedFormat('d M Y') }}</span>
-                <span class="text-slate-300"> · </span>
-                <span style="color: {{ $activity->category?->color ?? '#64748B' }}">{{ $activity->category?->name ?? 'Tanpa Kategori' }}</span>
                 @if ($showDriveActions)
                     <span class="text-slate-300"> · </span>
                     <span>{{ $activity->files_count }} file</span>
                 @endif
             </p>
-            <div class="mt-1">
+            <div class="mt-1 flex flex-wrap items-center gap-1">
+                <x-category-badge :category="$activity->category" />
                 <span class="inline-flex rounded-md px-1.5 py-0.5 text-[10px] font-semibold {{ $activity->status->colorClasses() }}">
                     {{ $activity->status_label }}
                 </span>

@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
 
 class StoreActivityRequest extends FormRequest
 {
@@ -22,9 +23,11 @@ class StoreActivityRequest extends FormRequest
             'notes' => ['nullable', 'string', 'max:5000'],
             'files' => ['nullable', 'array'],
             'files.*' => [
-                'file',
-                'max:51200',
-                'mimes:pdf,jpg,jpeg,png,doc,docx,xls,xlsx,ppt,pptx',
+                // Validasi berdasarkan ekstensi (bukan MIME).
+                // PPTX/DOCX/XLSX sering terdeteksi sebagai application/zip di server.
+                File::default()
+                    ->extensions(UploadActivityFileRequest::ALLOWED_EXTENSIONS)
+                    ->max(51200),
             ],
         ];
     }
@@ -41,7 +44,7 @@ class StoreActivityRequest extends FormRequest
         return [
             'files.*.uploaded' => 'File gagal diunggah. Pastikan ukuran maksimal 50 MB dan batas upload PHP di server mencukupi (upload_max_filesize / post_max_size).',
             'files.*.max' => 'Setiap file tidak boleh lebih dari 50 MB.',
-            'files.*.mimes' => 'Format file harus PDF, JPG, JPEG, PNG, DOC, DOCX, XLS, XLSX, PPT, atau PPTX.',
+            'files.*.extensions' => 'Format file harus PDF, JPG, JPEG, PNG, DOC, DOCX, XLS, XLSX, PPT, atau PPTX.',
         ];
     }
 }

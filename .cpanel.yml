@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/suhadipc/public_html/web_sikado
+    - export DEPLOYPATH=/home/suhadipc/public_html/web_sikado/
     - /bin/rm -f $DEPLOYPATH/bootstrap/cache/config.php
     - /bin/rm -f $DEPLOYPATH/bootstrap/cache/routes-v7.php
     - /bin/rm -f $DEPLOYPATH/bootstrap/cache/events.php

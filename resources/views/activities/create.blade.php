@@ -126,7 +126,7 @@
                 </svg>
                 Tambah berkas
             </button>
-            <p class="mt-1 text-[11px] text-slate-500">Opsional. Dasar kegiatan (undangan, surat tugas, dll). Maks. 10 MB/file.</p>
+            <p class="mt-1 text-[11px] text-slate-500">Opsional. Dasar kegiatan (undangan, surat tugas, dll). Maks. 50 MB/file.</p>
             @error('files') <p class="mt-1 text-xs text-rose-600">{{ $message }}</p> @enderror
             @error('files.*') <p class="mt-1 text-xs text-rose-600">{{ $message }}</p> @enderror
         </div>

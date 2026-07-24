@@ -23,7 +23,7 @@ class StoreActivityRequest extends FormRequest
             'files' => ['nullable', 'array'],
             'files.*' => [
                 'file',
-                'max:10240',
+                'max:51200',
                 'mimes:pdf,jpg,jpeg,png,doc,docx,xls,xlsx,ppt,pptx',
             ],
         ];
@@ -39,7 +39,8 @@ class StoreActivityRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'files.*.max' => 'Setiap file tidak boleh lebih dari 10 MB.',
+            'files.*.uploaded' => 'File gagal diunggah. Pastikan ukuran maksimal 50 MB dan batas upload PHP di server mencukupi (upload_max_filesize / post_max_size).',
+            'files.*.max' => 'Setiap file tidak boleh lebih dari 50 MB.',
             'files.*.mimes' => 'Format file harus PDF, JPG, JPEG, PNG, DOC, DOCX, XLS, XLSX, PPT, atau PPTX.',
         ];
     }

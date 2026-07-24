@@ -8,12 +8,14 @@ deployment:
     - /bin/rm -rf $DEPLOYPATH/database
     - /bin/rm -rf $DEPLOYPATH/resources
     - /bin/rm -rf $DEPLOYPATH/routes
+    - /bin/rm -rf $DEPLOYPATH/lang
     - /bin/cp -R app $DEPLOYPATH
     - /bin/cp -R bootstrap $DEPLOYPATH
     - /bin/cp -R config $DEPLOYPATH
     - /bin/cp -R database $DEPLOYPATH
     - /bin/cp -R resources $DEPLOYPATH
     - /bin/cp -R routes $DEPLOYPATH
+    - /bin/cp -R lang $DEPLOYPATH
     - /bin/cp -R public/. $DEPLOYPATH/public/
     - /bin/cp artisan $DEPLOYPATH
     - /bin/cp composer.json $DEPLOYPATH

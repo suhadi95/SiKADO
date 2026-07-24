@@ -19,7 +19,7 @@ class UploadActivityFileRequest extends FormRequest
             'files.*' => [
                 'required',
                 File::types(['pdf', 'jpg', 'jpeg', 'png', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'])
-                    ->max(10240),
+                    ->max(51200),
             ],
         ];
     }
@@ -28,7 +28,9 @@ class UploadActivityFileRequest extends FormRequest
     {
         return [
             'files.required' => 'Pilih minimal satu file untuk diunggah.',
-            'files.*.max' => 'Setiap file tidak boleh lebih dari 10 MB.',
+            'files.*.required' => 'Pilih minimal satu file untuk diunggah.',
+            'files.*.uploaded' => 'File gagal diunggah. Pastikan ukuran maksimal 50 MB dan batas upload PHP di server mencukupi (upload_max_filesize / post_max_size).',
+            'files.*.max' => 'Setiap file tidak boleh lebih dari 50 MB.',
             'files.*.mimes' => 'Format file harus PDF, JPG, JPEG, PNG, DOC, DOCX, XLS, XLSX, PPT, atau PPTX.',
             'files.*.extensions' => 'Format file harus PDF, JPG, JPEG, PNG, DOC, DOCX, XLS, XLSX, PPT, atau PPTX.',
         ];

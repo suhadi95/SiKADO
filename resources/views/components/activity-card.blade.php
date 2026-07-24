@@ -211,7 +211,7 @@
         <div class="absolute inset-0" x-on:click="close"></div>
         <div class="relative max-h-[85dvh] w-full max-w-sm overflow-y-auto rounded-2xl bg-white p-4 shadow-2xl">
             <h3 class="text-sm font-bold text-slate-900" x-text="title"></h3>
-            <p class="mt-1 text-xs text-slate-500">Pilih satu berkas. Tambah lagi jika perlu (maks. 10 MB/file).</p>
+            <p class="mt-1 text-xs text-slate-500">Pilih satu berkas. Tambah lagi jika perlu (maks. 50 MB/file).</p>
             <form
                 method="POST"
                 :action="action"

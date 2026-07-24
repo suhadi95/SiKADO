@@ -58,12 +58,14 @@ document.addEventListener('alpine:init', () => {
 
     Alpine.data('uploadModal', () => ({
         open: false,
+        menuOpen: false,
         title: '',
         action: '',
         slots: [0],
         nextSlotId: 1,
         maxSlots: 10,
         openFor(title, action) {
+            this.menuOpen = false;
             this.title = title;
             this.action = action;
             this.slots = [0];
@@ -72,6 +74,12 @@ document.addEventListener('alpine:init', () => {
         },
         close() {
             this.open = false;
+        },
+        toggleMenu() {
+            this.menuOpen = ! this.menuOpen;
+        },
+        closeMenu() {
+            this.menuOpen = false;
         },
         addSlot() {
             if (this.slots.length >= this.maxSlots) {

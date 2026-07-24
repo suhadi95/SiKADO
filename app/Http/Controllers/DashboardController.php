@@ -30,8 +30,7 @@ class DashboardController extends Controller
             ->with(['category', 'files'])
             ->needsEvidence()
             ->filter($filters)
-            ->latest('activity_date')
-            ->latest('id')
+            ->sortedByDate($filters['sort'] ?? 'date_desc')
             ->paginate(10)
             ->withQueryString();
 
@@ -52,12 +51,15 @@ class DashboardController extends Controller
 
     protected function filters(Request $request): array
     {
+        $sort = $request->input('sort');
+
         return [
             'name' => $request->string('name')->trim()->toString() ?: null,
             'category_id' => $request->input('category_id') ?: null,
             'month' => $request->input('month') ?: null,
             'year' => $request->input('year') ?: null,
             'status' => $request->input('status') ?: null,
+            'sort' => $sort === 'date_asc' ? 'date_asc' : 'date_desc',
         ];
     }
 }

@@ -176,6 +176,14 @@ class Activity extends Model
             });
     }
 
+    public function scopeSortedByDate(Builder $query, ?string $sort = 'date_desc'): Builder
+    {
+        return match ($sort) {
+            'date_asc' => $query->orderBy('activity_date')->orderBy('id'),
+            default => $query->orderByDesc('activity_date')->orderByDesc('id'),
+        };
+    }
+
     protected function applyStatusFilter(Builder $query, string $status): void
     {
         match ($status) {

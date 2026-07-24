@@ -6,11 +6,14 @@
 ])
 
 @php
+    $sort = $filters['sort'] ?? 'date_desc';
     $hasActiveFilter = filled($filters['name'] ?? null)
         || filled($filters['category_id'] ?? null)
         || filled($filters['status'] ?? null)
         || filled($filters['month'] ?? null)
-        || filled($filters['year'] ?? null);
+        || filled($filters['year'] ?? null)
+        || $sort === 'date_asc';
+    $sortLabel = $sort === 'date_asc' ? 'Tanggal terlama' : 'Tanggal terbaru';
 @endphp
 
 <div
@@ -23,12 +26,12 @@
         @click="open = !open"
     >
         <div class="min-w-0">
-            <p class="text-sm font-semibold text-slate-900">Filter</p>
+            <p class="text-sm font-semibold text-slate-900">Filter & Urutan</p>
             <p class="truncate text-[11px] text-slate-500">
                 @if ($hasActiveFilter)
-                    Filter aktif — ketuk untuk ubah
+                    {{ $sortLabel }} · filter aktif — ketuk untuk ubah
                 @else
-                    Cari nama, kategori, status, periode
+                    {{ $sortLabel }} · cari nama, kategori, status, periode
                 @endif
             </p>
         </div>
@@ -42,6 +45,14 @@
         x-show="open"
         x-cloak
     >
+        <div>
+            <label class="mb-0.5 block text-[11px] font-semibold text-slate-500">Urutkan tanggal</label>
+            <select name="sort" class="w-full rounded-lg border-slate-200 bg-slate-50 px-2.5 py-2 text-sm focus:border-brand-500 focus:ring-brand-500">
+                <option value="date_desc" @selected($sort === 'date_desc')>Tanggal terbaru</option>
+                <option value="date_asc" @selected($sort === 'date_asc')>Tanggal terlama</option>
+            </select>
+        </div>
+
         <div>
             <label class="mb-0.5 block text-[11px] font-semibold text-slate-500">Nama kegiatan</label>
             <input
